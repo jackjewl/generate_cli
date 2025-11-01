@@ -1,5 +1,4 @@
 
-from pathlib import Path
 from src.main.main import main as main
 
 from common import log
