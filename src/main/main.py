@@ -11,6 +11,6 @@ cwd=Path.cwd()
 
 def main():
     log.info("main.main")
-    cfg = init.init()
+    cfg = init.init("./settings/settings.yaml")
     init_app.init_app(cfg)
     run.run(cfg)
