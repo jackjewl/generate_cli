@@ -1,0 +1,64 @@
+mode: debug
+app_name: collect_integration
+#数据库
+database:
+  postgresql:
+    host: 127.0.0.1
+    user: user1
+    password: 12345
+    port: 5432
+    database: stock
+    driver: postgresql+psycopg2
+
+#数据基本路径
+stock_data_base_dir: "C:\\stock_data\\数据"
+
+#刚开始必须要收集的，所有股票列表
+all_stck_list:
+  start: true
+  store:
+    raw: "所有数据\\raw\\所有股票.csv"
+    result: "所有股票\\result\\所有股票.csv"
+
+stock_kline:
+  once_collect:
+    start: true
+    start_name: "平安银行"
+    count: 6000
+    export: true
+    clean: true
+    export_as_pg_import: true
+    interval:
+      count: 500
+      sleep: 60
+    store:
+      raw_store_dir: "个股历史k线\\个股历史k线收集\\raw"
+      result_store_dir: "个股历史k线\\个股历史k线收集\\result"
+      pg_import_store: "个股历史k线\\个股历史k线收集\\pg_import\\个股历史k线import.csv"
+  daily_collect:
+    start: true
+    # 每日启动时间
+    cron_time: ""
+    export: true
+    clean: true
+    store:
+      raw: "每日个股情况收集\\raw"
+      pg_import: "每日个股情况收集\\import"
+
+plate:
+  start: true
+  export: true
+  clean: true
+  store:
+    raw_dir: "板块数据\\板块列表"
+    pg_import: "板块数据\\板块列表"
+    name_code: "板块数据\\板块列表\\板块代码对应"
+
+  find_code: true
+  save_code_pg: true
+  plate_stock:
+    start: true
+    export: true
+    store:
+      raw: "板块数据\\板块列表"
+    insert: true
